@@ -7,6 +7,12 @@ function error404 () {
           <main>
               <h1>404: PAGE NOT FOUND</h1>
               <p>Oops, sorry, we can't find this page!</p>
+              <div>
+                <img id='error404Picture' src="images/karthegan-padmanaban-nYWlpZ_FErc-unsplash.jpg" alt="Baby pitbull" />
+                  <div>
+                    Photo by <a href="https://unsplash.com/@gixxerkidd">karthegan Padmanaban</a>on<a href="https://unsplash.com/">Unsplash</a>
+                  </div>
+              </div>
           </main>
       </Def>
     )
