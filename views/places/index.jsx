@@ -20,6 +20,7 @@ function indexPlaces(data){
             <Def>
                 <main>
                     <h1>Places to Rave About</h1>
+                    <a href="/"><button className="btn-primary">Home</button></a>
                     <div className='row'>
                     {placeFormatted}
                     </div>
