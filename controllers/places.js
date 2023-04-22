@@ -1,18 +1,16 @@
 const router = require('express').Router()
-
+let places = [];
 
 
 // More code here in a moment
 router.get('/', (req, res) => {
-    let places = [{
-        id: 0,
+    places = [{
         name: 'H-Thai-ML',
         city: 'Seattle',
         state: 'WA',
         cuisines: 'Thai, Pan-Asian',
         pic: 'http://placekitten.com/250/250'
       }, {
-        id: 1,
         name: 'Coding Cat Cafe',
         city: 'Phoenix',
         state: 'AZ',
@@ -27,9 +25,11 @@ router.get('/new', (req, res) => {
   res.render('places/new.jsx')
 })
 
-router.post('/new', (req, res) => {
+router.post('/', (req, res) => {
   places.push(req.body)
   res.redirect('/places')
+  console.log(places)
 })
 
 module.exports = router
+
