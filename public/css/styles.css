@@ -3,12 +3,17 @@ body {
     text-align: center;
   }
   
-  main {
+main {
     margin-right: 20px;
     margin-left: 20px;
     background-color: white;
-  }
-  
+}
+
+img {
+    width: 400px;
+    height: 500px;
+}
+
 h1 {
     text-align: center;
     color: cornflowerblue;
