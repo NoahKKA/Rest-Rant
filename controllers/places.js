@@ -33,7 +33,7 @@ router.get('/:id/edit', (req, res) => {
       res.render('error404')
   }
   else {
-    res.render('edit', {place: places[id]})
+    res.render('edit', {place: places[id], id})
   }
 })
 
