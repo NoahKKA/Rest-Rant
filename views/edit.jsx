@@ -25,7 +25,7 @@ function edit_form (data) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="cuisines">Cuisines</label>
-                    <input className="form-control" id="cuisines" name="cuisines" required />
+                    <input className="form-control" id="cuisines" name="cuisines" value={`${data.place.cuisines}`}required />
                 </div>
                 <input className="btn btn-primary" type="submit" value="Edit Place" />
             </form>
