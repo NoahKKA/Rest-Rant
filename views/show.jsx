@@ -12,12 +12,18 @@ function show (data) {
             </div>
             <div id='description'>
                 <h2>Description</h2>
-                <h3>Located in {data.place.city}, {data.place.state} and serving {data.place.cuisines}.</h3>
+                <h3>Located in {data.place.city}, {data.place.state}</h3>
             </div>
             <div id='comments'>
                 <h2>Comments</h2>
                 <h3>No Comments Yet!</h3>
             </div>
+            <h3>
+                {data.place.showEstablished()}
+            </h3>
+            <h4>
+                Serving {data.place.cuisines}
+            </h4>
             <a href={`/places/${data.id}/edit`} className="btn btn-warning"> 
                 Edit
             </a>  
