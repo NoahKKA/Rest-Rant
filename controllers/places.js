@@ -1,10 +1,17 @@
 const router = require('express').Router()
 const places = require('../models/places')
-
+const db = require('../models')
 
 // More code here in a moment
 router.get('/', (req, res) => {
-    res.render('places/index.jsx', {places})
+    db.Place.find()
+      .then((places) => {
+        res.render('places/index', {places})
+      })
+      .catch(err => {
+        console.log(err)
+        res.render('error404')
+      })
 })
 
 router.get('/new', (req, res) => {
@@ -39,20 +46,17 @@ router.get('/:id/edit', (req, res) => {
 
 
 router.post('/', (req, res) => {
-  console.log(req.body)
-  if (!req.body.pic) {
-    // Default image if one is not provided
-    req.body.pic = 'http://placekitten.com/400/400'
-  }
-  if (!req.body.city) {
-    req.body.city = 'Anytown'
-  }
-  if (!req.body.state) {
-    req.body.state = 'USA'
-  }
-  places.push(req.body)
-  res.redirect('/places')
+  db.Place.create(req.body)
+  .then(() => {
+      res.redirect('/places')
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
+
+
 
 router.delete('/:id', (req, res) => {
   let id = Number(req.params.id)
