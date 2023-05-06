@@ -1,5 +1,5 @@
 const React = require('react')
-const Def = require('./deafult')
+const Def = require('../deafult')
 
 function edit_form (data) {
     return (

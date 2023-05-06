@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
       })
       .catch(err => {
         console.log(err)
-        res.render('error404')
+        res.send(err)
       })
 })
 
@@ -20,12 +20,14 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', (req, res) => {
   db.Place.findById(req.params.id)
+  .populate('comments')
   .then(place => {
-      res.render('show', { place })
+      console.log(place.comments)
+      res.render('places/show.jsx', { place })
   })
   .catch(err => {
       console.log('err', err)
-      res.render('error404')
+      res.send(err)
   })
 })
 
@@ -33,13 +35,13 @@ router.get('/:id', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   let id = Number(req.params.id)
   if (isNaN(id)) {
-      res.render('error404')
+    res.render('error404')
   }
   else if (!places[id]) {
-      res.render('error404')
+    res.render('error404')
   }
   else {
-    res.render('edit', {place: places[id], id})
+    res.render('places/edit.jsx', {places})
   }
 })
 
@@ -60,21 +62,53 @@ router.post('/', (req, res) => {
       res.render('places/new', { message })
       }
       else {
-          res.render('error404')
+          res.send(err)
       }
     })
 })
 
+//Post Comment
+router.post('/:id/comment', (req, res) => {
+  console.log(req.body)
+  db.Place.findById(req.params.id)
+  .then(place => {
+      db.Comment.create(req.body)
+      .then(comment => {
+          place.comments.push(comment.id)
+          place.save()
+          .then(() => {
+              res.redirect(`/places/${req.params.id}`)
+          })
+      })
+      .catch(err => {
+          res.send(err)
+      })
+  })
+  .catch(err => {
+      res.render('error404')
+  })
+})
 
-
+//Delete Comment
+router.delete('/:id/comment/:commentId', (req, res) => {
+  db.Comment.findByIdAndDelete(req.params.commentId)
+      .then(() => {
+          console.log('Success')
+          res.redirect(`/places/${req.params.id}`)
+      })
+      .catch(err => {
+          console.log('err', err)
+          res.render('error404')
+      })
+})
 
 router.delete('/:id', (req, res) => {
   let id = Number(req.params.id)
   if (isNaN(id)) {
-    res.render('error404')
+      res.render('error404')
   }
   else if (!places[id]) {
-    res.render('error404')
+      res.render('error404')
   }
   else {
     places.splice(id, 1)
