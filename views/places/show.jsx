@@ -24,7 +24,7 @@ function show (data) {
         }
         rating = (
           <h3>
-            {stars} stars
+            Rating {stars} stars
           </h3>
         )
         comments = data.place.comments.map(c => {
@@ -48,8 +48,7 @@ function show (data) {
           <main>
             <h1>{ data.place.name }</h1>
             <div id='rating'>
-                <h2>Rating</h2>
-                <h3>Not Rated</h3>
+                {rating}
             </div>
             <div id='description'>
                 <h2>Description</h2>
